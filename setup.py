@@ -6,7 +6,7 @@ Created on Nov 10, 2014
 To install/reinstall/uninstall the project and its dependencies using pip:
      pip install ./
      pip install ./ --upgrade
-     pip uninstall liblightsec
+     pip uninstall httpliblightsec
 '''
 from setuptools import setup #, find_packages
 
@@ -24,8 +24,6 @@ setup(name="liblightsec",
       package_dir = {
         '': 'src',
       },
-      packages = ["httplightsec"],
-      install_requires = [
-	"liblightsec"
-      ],
+      packages = [ "httplightsec" ],
+      install_requires = [ "liblightsec", "Flask-SQLAlchemy", "Flask-Login", "Flask-Admin" ],
 )
