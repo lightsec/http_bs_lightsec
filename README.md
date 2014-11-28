@@ -1,7 +1,7 @@
-pyNist800-108
-=============
+Sample Base Station using liblightsec
+=====================================
 
-Python implementation of Nist SP 800-108 KDF in Counter Mode
+HTTP-based implementation for a sample Base Station which uses liblightsec.
 
 
 Installation
