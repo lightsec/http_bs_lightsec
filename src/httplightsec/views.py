@@ -4,53 +4,17 @@ Created on 16/11/2014
 @author: Aitor Gomez Goiri <aitor.gomez@deusto.es>
 '''
 
-from flask import Flask, g, session, redirect, request, render_template, flash, url_for
+from flask import redirect, request, render_template, url_for
 from flask.ext import login as flogin
-from flask.ext.admin import Admin, helpers
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.admin import helpers
 from flask.ext.admin.contrib.sqla import ModelView
-from flask.ext.login import LoginManager, login_required, login_user, logout_user
+from flask.ext.login import login_required, login_user, logout_user
 from wtforms import Form, TextField, HiddenField, PasswordField, validators
 from werkzeug.security import check_password_hash , generate_password_hash
+from httplightsec.app import app, db
+from httplightsec.auth import login_manager
+from httplightsec.models import User
 
-
-app = Flask(__name__)
-app.debug = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
-
-db = SQLAlchemy(app)
-
-# Create dummy secret key so we can use sessions
-app.config['SECRET_KEY'] = 'super dummy s3cret'
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = "login"
-
-#new_user = User(...)
-#db.session.add(new_user)
-#db.session.commit()
-
-
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True)
-    password = db.Column(db.String(120), unique=True)
-
-    def __repr__(self):
-        return '<User %r>' % self.username
-    
-        # Flask-Login integration
-    def is_authenticated(self):
-        return True
-
-    def is_active(self):
-        return True
-
-    def is_anonymous(self):
-        return False
-
-    def get_id(self):
-        return self.id
 
 class UserView(ModelView):
     
@@ -133,10 +97,9 @@ def logout():
 def settings():
     return "Logged!"
 
-
-if __name__ == "__main__":
-    db.create_all()
-    admin = Admin(app) # check /admin
-    admin.add_view(UserView(db.session)) #, url="user"))
-    
-    app.run()
+@app.route("/sensors")
+@login_required
+def show_sensor_keys():
+    # locate sensor by id
+    #if flogin.current_user.username==:    
+    return "bah"
