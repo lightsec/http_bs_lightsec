@@ -41,8 +41,9 @@ class User(db.Model):
 class Sensor(db.Model):
     __tablename__ = 'sensor'
     id = db.Column(db.Integer, primary_key=True)
-    auth_key = db.Column(db.String(120), unique=True)
-    enc_key = db.Column(db.String(120), unique=True)
+    mac = db.Column(db.String(12), unique=True)
+    auth_key = db.Column(db.String(120))
+    enc_key = db.Column(db.String(120))
     auth_users = db.relationship('User', secondary=lambda: access_table)
     #auth_user
     

@@ -4,16 +4,20 @@ Created on 16/11/2014
 @author: Aitor Gomez Goiri <aitor.gomez@deusto.es>
 '''
 
-from flask import redirect, request, render_template, url_for
+from flask import redirect, request, render_template, url_for, jsonify
 from flask.ext import login as flogin
 from flask.ext.admin import helpers
 from flask.ext.admin.contrib.sqla import ModelView
 from flask.ext.login import login_required, login_user, logout_user
 from wtforms import Form, TextField, HiddenField, PasswordField, validators
 from werkzeug.security import check_password_hash , generate_password_hash
+from lightsec.helpers import BaseStationHelper
+from Crypto.Hash.SHA256 import SHA256Hash
+from lightsec.tools.key_derivation import KeyDerivationFunctionFactory, Nist800
 from httplightsec.app import app, db
 from httplightsec.auth import login_manager
-from httplightsec.models import User
+from httplightsec.models import User, Sensor
+from httplightsec.store import SQLAlchemySecretStore
 
 
 class UserView(ModelView):
@@ -92,14 +96,36 @@ def logout():
     flogin.logout_user()
     return redirect(url_for("index"))
 
+@app.errorhandler(404)
+def not_found(error=None):
+    message = {
+            'status': 404,
+            'message': 'Not Found: %s.\n%s' % (request.url, error),
+    }
+    resp = jsonify(message)
+    resp.status_code = 404
+    return resp
+
+
 @app.route("/settings")
 @login_required
 def settings():
     return "Logged!"
 
-@app.route("/sensors")
+
+@app.route("/sensors/<sensor_id>")
 @login_required
-def show_sensor_keys():
-    # locate sensor by id
-    #if flogin.current_user.username==:    
-    return "bah"
+def show_sensor_keys(sensor_id):
+    sensor = db.session.query(Sensor).filter(Sensor.mac==sensor_id).first()
+    if sensor is None:
+        return not_found(error="The logged user has no such sensor associated.")
+    
+    kdf_factory = KeyDerivationFunctionFactory( Nist800, SHA256Hash(), 256 )
+    base_station = BaseStationHelper( kdf_factory, store=SQLAlchemySecretStore() )
+    stuff = base_station.create_keys( flogin.current_user.username, sensor_id, 10 )
+    
+    ret = stuff.copy()
+    # The data is in fact binary so decoding it to Unicode is a nonsense.
+    ret['kauth'] = [int(b) for b in stuff['kauth']]
+    ret['kenc'] = [int(b) for b in stuff['kenc']]
+    return jsonify(ret)

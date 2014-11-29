@@ -30,10 +30,10 @@ Usage
    
     ```python webapp.py```
 
-2. Go to _/admin_ and create a sample user.
+2. Go to _/admin_ and create a sample user and a sample sensor associated to it.
 
-3. Go to _/settings_ and as you are not logged in, you will be redirected to the login page.
+3. Go to _/sensors/{sample-mac}_ and as you are not logged in, you will be redirected to the login page.
 
 4. Introduce the username and password of the sample user created before.
 
-5. Then, you will be reditected to _settings_ and you will be able to see a message.
+5. Then, you will be reditected to _/sensors/{sample-mac}_ and you will see the information from [liblightsec's fourth step](https://github.com/lightsec/liblightsec).
