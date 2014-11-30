@@ -6,11 +6,11 @@ Created on Nov 10, 2014
 To install/reinstall/uninstall the project and its dependencies using pip:
      pip install ./
      pip install ./ --upgrade
-     pip uninstall httpliblightsec
+     pip uninstall httpbsliblightsec
 '''
 from setuptools import setup #, find_packages
 
-setup(name="liblightsec",
+setup(name="httpbsliblightsec",
       version="0.1",
       description="Sample HTTP server for a base station following the lightsec protocol.",
       #long_description = "",

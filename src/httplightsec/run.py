@@ -1,7 +1,7 @@
 '''
 Created on 28/11/2014
 
-@author: tulvur
+@author: Aitor Gomez Goiri <aitor.gomez@deusto.es>
 '''
 
 from httplightsec.app import app, db
