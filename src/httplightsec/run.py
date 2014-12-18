@@ -5,7 +5,7 @@ Created on 28/11/2014
 """
 
 from httplightsec.app import app, db
-from httplightsec.admin import *
+from httplightsec.admin import admin
 from httplightsec.auth import *
 from httplightsec.models import *
 from httplightsec.views import *

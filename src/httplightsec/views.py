@@ -4,6 +4,7 @@ Created on 16/11/2014
 @author: Aitor Gomez Goiri <aitor.gomez@deusto.es>
 """
 
+import binascii
 from flask import redirect, request, render_template, url_for, jsonify
 from flask.ext import login as flogin
 from flask.ext.admin import helpers
@@ -130,6 +131,6 @@ def show_sensor_keys(sensor_id):
 
     ret = stuff.copy()
     # The data is in fact binary so decoding it to Unicode is a nonsense.
-    ret['kauth'] = [int(b) for b in stuff['kauth']]
-    ret['kenc'] = [int(b) for b in stuff['kenc']]
+    ret['kauth'] = binascii.hexlify(stuff['kauth'])
+    ret['kenc'] = binascii.hexlify(stuff['kenc'])
     return jsonify(ret)
