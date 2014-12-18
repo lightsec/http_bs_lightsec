@@ -41,7 +41,7 @@ class LoginForm(Form):
     ])
     password = PasswordField('New Password', [
         validators.Required()  # ,
-        #validators.EqualTo('confirm', message='Passwords must match')
+        # validators.EqualTo('confirm', message='Passwords must match')
     ])
     # confirm = PasswordField('Repeat Password')
     next = HiddenField()
@@ -116,6 +116,12 @@ def not_found(error=None):
 @login_required
 def settings():
     return "Logged!"
+
+
+@app.route("/sensors")
+@login_required
+def show_sensors_for_user():
+    return jsonify({'sensors': [sensor.mac for sensor in flogin.current_user.has_access_to]})
 
 
 @app.route("/sensors/<sensor_id>")
