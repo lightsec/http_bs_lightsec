@@ -1,8 +1,8 @@
-'''
+"""
 Created on 28/11/2014
 
 @author: Aitor Gomez Goiri <aitor.gomez@deusto.es>
-'''
+"""
 
 from httplightsec.app import app, db
 from httplightsec.admin import *

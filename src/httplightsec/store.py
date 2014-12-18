@@ -1,8 +1,8 @@
-'''
+"""
 Created on 29/11/2014
 
 @author: Aitor Gomez Goiri <aitor.gomez@deusto.es>
-'''
+"""
 
 from httplightsec.app import db
 from httplightsec.models import Sensor

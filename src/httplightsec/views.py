@@ -1,8 +1,8 @@
-'''
+"""
 Created on 16/11/2014
 
 @author: Aitor Gomez Goiri <aitor.gomez@deusto.es>
-'''
+"""
 
 from flask import redirect, request, render_template, url_for, jsonify
 from flask.ext import login as flogin
