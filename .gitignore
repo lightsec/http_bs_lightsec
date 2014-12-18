@@ -52,3 +52,10 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# Eclipse
+.project
+.pydevproject
+
+# PyCharm
+.idea/
