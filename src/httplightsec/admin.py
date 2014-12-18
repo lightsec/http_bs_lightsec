@@ -10,6 +10,6 @@ from httplightsec.app import app, db
 from httplightsec.models import Sensor
 from httplightsec.views import UserView
 
-admin = Admin(app) # check /admin
-admin.add_view(UserView(db.session)) #, url="user"))
+admin = Admin(app)  # check /admin
+admin.add_view(UserView(db.session))  # , url="user"))
 admin.add_view(ModelView(Sensor, db.session))

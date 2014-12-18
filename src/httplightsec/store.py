@@ -13,19 +13,19 @@ class SQLAlchemySecretStore(AbstractSecretStore):
     # we can "install" it using the admin panel
     def install_auth_secret(self, identifier, secret):
         pass
-    
+
     # we can "install" it using the admin panel
     def install_enc_secret(self, identifier, secret):
         pass
-    
+
     def get_auth_secret(self, identifier):
-        u = db.session.query(Sensor).filter(Sensor.mac==identifier).first()
+        u = db.session.query(Sensor).filter(Sensor.mac == identifier).first()
         if u is not None:
-            return str(u.auth_key) # expects str not unicode
-        return None # I prefer to make it explicit :-)
-    
+            return str(u.auth_key)  # expects str not unicode
+        return None  # I prefer to make it explicit :-)
+
     def get_enc_secret(self, identifier):
-        u = db.session.query(Sensor).filter(Sensor.mac==identifier).first()
+        u = db.session.query(Sensor).filter(Sensor.mac == identifier).first()
         if u is not None:
-            return str(u.enc_key) # expects str not unicode
-        return None # I prefer to make it explicit :-)
+            return str(u.enc_key)  # expects str not unicode
+        return None  # I prefer to make it explicit :-)
