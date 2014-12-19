@@ -38,7 +38,10 @@ def create_sample_data_if_needed():
     db.session.commit()
 
 
-if __name__ == "__main__":
+def main():
     db.create_all()
     create_sample_data_if_needed()
     app.run()
+
+if __name__ == "__main__":
+    main()

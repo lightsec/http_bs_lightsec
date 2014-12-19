@@ -26,4 +26,9 @@ setup(name="httpbsliblightsec",
       },
       packages=["httplightsec"],
       install_requires=["liblightsec", "Flask-SQLAlchemy", "Flask-Login", "Flask-Admin"],
+      entry_points={
+          'console_scripts': [
+              'run-basestation = httplightsec.run:main',
+          ],
+      },
 )
