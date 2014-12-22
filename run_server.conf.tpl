@@ -12,4 +12,4 @@ env VIRTUALENV_BIN={{pyhome}}/bin
 
 chdir /home/{{execuser}}/
 
-exec $VIRTUALENV_BIN/python $VIRTUALENV_BIN/weblab-admin start {{instancedir}}
+exec $VIRTUALENV_BIN/run-basestation -config {{config_file}}
