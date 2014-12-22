@@ -3,6 +3,8 @@ Created on 18/12/2014
 
 @author: Aitor Gomez Goiri <aitor.gomez@deusto.es>
 """
+
+import argparse
 import ConfigParser
 
 
@@ -34,4 +36,8 @@ class ConfigFileReader(object):
         return self.config.get('Sensor', 'enckey')
 
 
-configuration = ConfigFileReader("../../config.ini")
+parser = argparse.ArgumentParser(description='Run sample web server which uses liblightsec.')
+parser.add_argument('-config', default='../../config.ini', dest='config',
+                    help='Configuration file.')
+args = parser.parse_args()
+configuration = ConfigFileReader(args.config)
