@@ -41,7 +41,7 @@ def create_sample_data_if_needed():
 def main():
     db.create_all()
     create_sample_data_if_needed()
-    app.run()
+    app.run(host='0.0.0.0')
 
 if __name__ == "__main__":
     main()
