@@ -28,7 +28,7 @@ Usage
 
 1. Run the web server.
    
-    ```python webapp.py```
+    ```cd httplightsec; python run.py```
 
 2. Go to _/admin_ and create a sample user and a sample sensor associated to it.
 
